@@ -6,6 +6,17 @@ Havaach
 Cookieevee133
 Donutmove
 Sl0wp0ke
+Slowpoke
+SlOwpoke
+Sl0wpoke
+
+Sl0w
+SlOw
+Slow
+p0ke
+pOke
+poke 
+
 Selects
 PastelSugarLand
 Ne0nTempest
@@ -16,6 +27,7 @@ AngerMango
 RagingApple
 Fabz
 c0nD
+cOnD
 Esoteric7
 Sleekomic
 ChickenNo0dles
@@ -23,6 +35,11 @@ Ottersville
 GGGKnuffle
 kingdomhayiu
 NztExist
+#####
+######
+Rainstorm#
+Jura#
+
 
 1
 2
@@ -34,3 +51,5 @@ NztExist
 8
 9
 0
+
+#
