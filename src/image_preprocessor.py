@@ -163,3 +163,20 @@ def sharpen_image(image):
 def add_padding(image, left=100, top=0, right=0, bottom=0):
     """Adds padding to an image."""
     return cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=0)
+
+
+
+def thin_font(image):
+    image = cv2.bitwise_not(image)    
+    kernel = np.ones((2, 2), np.uint8)
+    image = cv2.erode(image, kernel, iterations=1)
+    image = cv2.bitwise_not(image)
+    return image
+
+
+def thick_font(image):
+    image = cv2.bitwise_not(image)    
+    kernel = np.ones((2, 2), np.uint8)
+    image = cv2.dilate(image, kernel, iterations=1)
+    image = cv2.bitwise_not(image)
+    return image

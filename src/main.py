@@ -13,14 +13,17 @@ def process_image(image_path, verbose=False):
     dpreprocessed_path = os.path.join(temp_dir, "damage.jpg")
     os.makedirs(temp_dir, exist_ok=True)
     
-    # OCR
-    config = "--psm 6 -c tessedit_char_whitelist=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    config = (
+    "--user-words CreampuffBOT/ocr/words.txt "
+    "--psm 6 "
+    "-c tessdict_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#"
+    )
     ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
     ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
     
     if verbose:
-        print("OCR Username: ", ocr_username)
-        print("OCR Damage: ", ocr_damage)
+        print("OCR Username:\n", ocr_username)
+        print("OCR Damage:\n", ocr_damage)
         
     return ocr_username, ocr_damage
 
