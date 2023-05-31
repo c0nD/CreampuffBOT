@@ -158,3 +158,8 @@ def sharpen_image(image):
     sharpened_image = cv2.filter2D(image, -1, sharpening_kernel)
 
     return sharpened_image
+
+
+def add_padding(image, left=100, top=0, right=0, bottom=0):
+    """Adds padding to an image."""
+    return cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=0)

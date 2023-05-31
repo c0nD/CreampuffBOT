@@ -14,8 +14,7 @@ def process_image(image_path, verbose=False):
     os.makedirs(temp_dir, exist_ok=True)
     
     # OCR
-    os.environ['TESSDATA_PREFIX'] = 'CreampuffBOT/'
-    config = "--psm 6 -c tessedit_char_whitelist=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -l mikado"
+    config = "--psm 6 -c tessedit_char_whitelist=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
     ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
     
