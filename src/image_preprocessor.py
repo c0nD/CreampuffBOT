@@ -7,11 +7,28 @@ def isolate_yellow(image):
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
     # Define lower and upper range for yellow color in HSV
-    lower_yellow = np.array([20, 100, 100])
-    upper_yellow = np.array([30, 255, 255])
+    lower_yellow = np.array([27, 100, 100])
+    upper_yellow = np.array([37, 255, 255])
 
     # Threshold the HSV image to get only yellow colors
     mask = cv2.inRange(hsv_image, lower_yellow, upper_yellow)
+
+    # Bitwise-AND mask and original image
+    result = cv2.bitwise_and(image, image, mask=mask)
+    
+    return result
+
+
+def isolate_white(image):
+    # Convert image from BGR to HSV
+    hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    
+    # Define lower and upper range for white color in HSV
+    lower_white = np.array([0, 0, 235])
+    upper_white = np.array([180, 25, 255])
+
+    # Threshold the HSV image to get only white colors
+    mask = cv2.inRange(hsv_image, lower_white, upper_white)
 
     # Bitwise-AND mask and original image
     result = cv2.bitwise_and(image, image, mask=mask)
@@ -26,10 +43,12 @@ def crop_right(image):
     return cropped_image
 
 
+# obtain the second fifth of the image
 def crop_left(image):
     width = image.shape[1]
-    start_x = width // 4
-    cropped_image = image[:, start_x:]
+    start_x = int(width * 350 / 1920)
+    end_x = int(width * 560 / 1920)
+    cropped_image = image[:, start_x:end_x]
     return cropped_image
 
 
