@@ -10,6 +10,7 @@ def isolate_damage(path):
     print("Image Loaded: ", img is not None)
     
     img = pi.crop_right(img)  # right quarter
+    img = pi.crop_center(img)  # top/bottom 1/6
     img = pi.isolate_yellow(img)
     img = pi.grayscale(img)
     img = pi.binarize(img)
@@ -18,6 +19,6 @@ def isolate_damage(path):
     
     
     # Save & display image
-    cv2.imwrite('damage.jpg', img)
-    display('damage.jpg')
+    cv2.imwrite('CreampuffBOT/temp/damage.jpg', img)
+    display('CreampuffBOT/temp/damage.jpg')
     

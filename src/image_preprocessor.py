@@ -21,7 +21,7 @@ def isolate_yellow(image):
 
 def crop_right(image):
     width = image.shape[1]
-    start_x = width * 3 // 4
+    start_x = width * 5 // 8
     cropped_image = image[:, start_x:]
     return cropped_image
 
@@ -30,6 +30,15 @@ def crop_left(image):
     width = image.shape[1]
     start_x = width // 4
     cropped_image = image[:, start_x:]
+    return cropped_image
+
+
+# (return the center of the image, remove top and bottom 1/6)
+def crop_center(image):
+    height, width = image.shape[:2]
+    start_y = height // 6
+    end_y = height - start_y
+    cropped_image = image[start_y:end_y, :]
     return cropped_image
 
 
