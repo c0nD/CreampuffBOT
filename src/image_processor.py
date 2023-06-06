@@ -19,7 +19,7 @@ def isolate_damage(path):
     
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/damage.jpg', img)
-    display('CreampuffBOT/temp/damage.jpg')
+    #display('CreampuffBOT/temp/damage.jpg')
     
     
 def isolate_username(path):
@@ -37,4 +37,21 @@ def isolate_username(path):
     
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/username.jpg', img)
-    display('CreampuffBOT/temp/username.jpg')
+    #display('CreampuffBOT/temp/username.jpg')
+    
+    
+def isolate_boss(path):
+    
+    img = cv2.imread(path)
+    
+    img = pi.crop_boss(img)
+    img = pi.crop_center(img)
+    img = pi.isolate_red(img)
+    img = pi.grayscale(img)
+    img = pi.binarize(img)
+    img = pi.noise_removal(img)
+    img = pi.add_padding(img, left=100, right=50)
+    
+    # Save & display image
+    cv2.imwrite('CreampuffBOT/temp/boss.jpg', img)
+    #display('CreampuffBOT/temp/boss.jpg')

@@ -19,6 +19,24 @@ def isolate_yellow(image):
     return result
 
 
+def isolate_red(image):
+    # Convert image from BGR to HSV
+    hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    
+    # Define lower and upper range for red color in HSV (specific red is  (208,126,127).)
+    # Isolating a 'salmon' like color
+    lower_red = np.array([0, 85, 100])
+    upper_red = np.array([7, 100, 250])
+    
+    # Threshold the HSV image to get only red colors
+    mask = cv2.inRange(hsv_image, lower_red, upper_red)
+    
+    # Bitwise-AND mask and original image
+    result = cv2.bitwise_and(image, image, mask=mask)
+    
+    return result
+
+
 def isolate_white(image):
     # Convert image from BGR to HSV
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -58,6 +76,14 @@ def crop_center(image):
     start_y = height // 6
     end_y = height - start_y
     cropped_image = image[start_y:end_y, :]
+    return cropped_image
+
+
+def crop_boss(image):
+    width = image.shape[1]
+    start_x = int(width * 650 / 1920)
+    end_x = int(width * 875 / 1920)
+    cropped_image = image[:, start_x:end_x]
     return cropped_image
 
 
