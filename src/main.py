@@ -22,11 +22,16 @@ def process_image(image_path, verbose=False):
     "--psm 6 "
     "-c tessdict_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#"
     )
+
     ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
     ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
     ocr_boss = pytesseract.image_to_string(Image.open(bpreprocessed_path), config=config)
     
-    hits = [Hit(u, d, b) for u, d, b in zip(ocr_username.splitlines(), ocr_damage.splitlines(), ocr_boss.splitlines())]
+    ocr_username_lines = ocr_username.splitlines()
+    ocr_damage_lines = ocr_damage.splitlines()
+    ocr_boss_lines = ocr_boss.splitlines()
+    
+    hits = [Hit(u, d, b) for u, d, b in zip(ocr_username_lines, ocr_damage_lines, ocr_boss_lines)]
     
     if verbose:
         for hit in hits:
@@ -34,15 +39,26 @@ def process_image(image_path, verbose=False):
     return hits
 
 def main():
-    img_folder = "CreampuffBOT/imgs"
     all_hits = []
 
-    # Process all images in the img_folder
-    for img_file in os.listdir(img_folder):
-        img_path = os.path.join(img_folder, img_file)
-        hits = process_image(img_path, verbose=True)
-        all_hits.extend(hits)  # add hits to master list
+    # Set this to True to process all images in directory, or False to process a single image
+    process_all_images = False  # Change this to False to process single image
 
+    path = "CreampuffBOT/imgs"
+    if process_all_images:
+        # Process all images in the directory
+        for img_file in os.listdir(path):
+            img_path = os.path.join(path, img_file)
+            hits = process_image(img_path, verbose=True)
+            all_hits.extend(hits)  # add hits to master list
+    else:
+        # Process a single image
+        image_file = "damage1.jpg"  # specify the file name here
+        img_path = os.path.join(path, image_file)
+        hits = process_image(img_path, verbose=True)
+        all_hits.extend(hits)
+
+    # You now have a list of all Hit objects in all_hits
 
 if __name__ == "__main__":
     main()
