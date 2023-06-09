@@ -34,8 +34,15 @@ def process_image(image_path, verbose=False):
     return hits
 
 def main():
-    path = "CreampuffBOT/src/damage1.jpg"
-    process_image(path, verbose=True)
+    img_folder = "CreampuffBOT/imgs"
+    all_hits = []
+
+    # Process all images in the img_folder
+    for img_file in os.listdir(img_folder):
+        img_path = os.path.join(img_folder, img_file)
+        hits = process_image(img_path, verbose=True)
+        all_hits.extend(hits)  # add hits to master list
+
 
 if __name__ == "__main__":
     main()
