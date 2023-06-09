@@ -3,6 +3,7 @@ import pytesseract
 from PIL import Image
 import image_processor as ip
 import os
+from hit import Hit
 
 def process_image(image_path, verbose=False):
     ip.isolate_damage(image_path)
@@ -25,15 +26,15 @@ def process_image(image_path, verbose=False):
     ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
     ocr_boss = pytesseract.image_to_string(Image.open(bpreprocessed_path), config=config)
     
+    hits = [Hit(u, d, b) for u, d, b in zip(ocr_username.splitlines(), ocr_damage.splitlines(), ocr_boss.splitlines())]
+    
     if verbose:
-        print("OCR Username:\n", ocr_username)
-        print("OCR Damage:\n", ocr_damage)
-        print("OCR Boss:\n", ocr_boss)
-    return ocr_username, ocr_damage
-
+        for hit in hits:
+            print(hit.serialize())
+    return hits
 
 def main():
-    path = "CreampuffBOT/src/damage2.jpg"
+    path = "CreampuffBOT/src/damage1.jpg"
     process_image(path, verbose=True)
 
 if __name__ == "__main__":
