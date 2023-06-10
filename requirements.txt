@@ -3,5 +3,5 @@ opencv-python
 matplotlib
 Pillow
 PyQt5
-jsonpickle
 pyinstaller
+pandas
