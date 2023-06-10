@@ -1,9 +1,9 @@
-import pytesseract
-from PIL import Image
+import easyocr
 import image_processor as ip
 import os
 from hit import Hit
 import pandas as pd
+from PIL import Image
 
 def process_image(image_path, verbose=False):
     ip.isolate_damage(image_path)
@@ -17,23 +17,13 @@ def process_image(image_path, verbose=False):
     
     os.makedirs(temp_dir, exist_ok=True)
     
-    config = (
-    "--oem 3 "
-    "-l eng+kor+chi_sim "
-    "--user-words CreampuffBOT/ocr/words.txt "
-    "--psm 6 "
-    "-c tessdict_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#"
-    )
+    reader = easyocr.Reader(['en', 'ch_sim'])  # you can change the languages according to your requirement
+    
+    ocr_username = reader.readtext(upreprocessed_path)
+    ocr_damage = reader.readtext(dpreprocessed_path)
+    ocr_boss = reader.readtext(bpreprocessed_path)
 
-    ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
-    ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
-    ocr_boss = pytesseract.image_to_string(Image.open(bpreprocessed_path), config=config)
-    
-    ocr_username_lines = ocr_username.splitlines()
-    ocr_damage_lines = ocr_damage.splitlines()
-    ocr_boss_lines = ocr_boss.splitlines()
-    
-    hits = [Hit(u, d, b) for u, d, b in zip(ocr_username_lines, ocr_damage_lines, ocr_boss_lines)]
+    hits = [Hit(u[1], d[1], b[1]) for u, d, b in zip(ocr_username, ocr_damage, ocr_boss)]
     
     if verbose:
         for hit in hits:
@@ -52,13 +42,14 @@ def main():
         # Process all images in the directory
         for img_file in os.listdir(path):
             img_path = os.path.join(path, img_file)
-            hits = process_image(img_path, verbose=True)
+            hits = process_image(img_path, verbose=False)
             all_hits.extend(hits)  # add hits to master list
+            print("Hit count: ", len(hits))
     else:
         # Process a single image
         image_file = "damage1.jpg"  # specify the file name here
         img_path = os.path.join(path, image_file)
-        hits = process_image(img_path, verbose=True)
+        hits = process_image(img_path, verbose=False)
         all_hits.extend(hits)
 
     # You now have a list of all Hit objects in all_hits
@@ -75,6 +66,7 @@ def main():
     
     # Saving the dataframe to a csv file
     df_sorted.to_csv(os.path.join(output_dir, 'output.csv'), index=False)
+
 
 if __name__ == "__main__":
     main()
