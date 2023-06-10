@@ -6,8 +6,6 @@ import os
 from hit import Hit
 import easyocr
 
-
-
 def process_image(image_path, verbose=False):
     ip.isolate_damage(image_path)
     ip.isolate_username(image_path)
@@ -20,17 +18,21 @@ def process_image(image_path, verbose=False):
     
     os.makedirs(temp_dir, exist_ok=True)
     
-    reader = easyocr.Reader(['en'], verbose=False)  # Specify the language(s) and set verbose to False
+    config = (
+    "--oem 3 "
+    "-l eng+kor+chi_sim "
+    "--user-words CreampuffBOT/ocr/words.txt "
+    "--psm 6 "
+    "-c tessdict_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#"
+    )
 
-    ocr_username = reader.readtext(upreprocessed_path)
-    ocr_damage = reader.readtext(dpreprocessed_path)
-    ocr_boss = reader.readtext(bpreprocessed_path)
+    ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
+    ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
+    ocr_boss = pytesseract.image_to_string(Image.open(bpreprocessed_path), config=config)
     
-    # EasyOCR returns a list of tuples, each containing the coordinates of the text
-    # and the text itself. We extract just the text and join it into a single string.
-    ocr_username_lines = [' '.join(result[1] for result in ocr_username)]
-    ocr_damage_lines = [' '.join(result[1] for result in ocr_damage)]
-    ocr_boss_lines = [' '.join(result[1] for result in ocr_boss)]
+    ocr_username_lines = ocr_username.splitlines()
+    ocr_damage_lines = ocr_damage.splitlines()
+    ocr_boss_lines = ocr_boss.splitlines()
     
     hits = [Hit(u, d, b) for u, d, b in zip(ocr_username_lines, ocr_damage_lines, ocr_boss_lines)]
     
