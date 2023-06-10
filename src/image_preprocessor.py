@@ -191,6 +191,25 @@ def add_padding(image, left=100, top=0, right=0, bottom=0):
     return cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=0)
 
 
+def dilate_image(img, kernel_size=2):
+    """Dilate image to separate characters."""
+    kernel = np.ones((kernel_size, kernel_size), np.uint8)
+    dilated_img = cv2.dilate(img, kernel, iterations=1)
+    return dilated_img
+
+
+def close_image(img, kernel_size=1):
+    """Close image to fill in gaps."""
+    kernel = np.ones((kernel_size, kernel_size), np.uint8)
+    closed_img = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+    return closed_img
+
+
+def gaussian_blur(img, kernel_size=5):
+    """Apply a Gaussian blur to an image."""
+    blurred_img = cv2.GaussianBlur(img, (kernel_size, kernel_size), 0)
+    return blurred_img
+
 
 def thin_font(image):
     image = cv2.bitwise_not(image)    
