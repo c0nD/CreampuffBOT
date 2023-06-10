@@ -30,7 +30,7 @@ If you do get an error, check to make sure it is properly installed, but more im
 
 ## Setting up trained data language
 
-The `mikado.traineddata` file is a file that has specifically trained on the Cookie Run: Kingdom font. (located in `./fonts`)
+The `mikado.traineddata` file is a file that has specifically trained on the Cookie Run: Kingdom font. (located in `./ocr`)
 
 > To make it work, place this file in your Tesseract-OCR location (usually): `C:/Program Files/Tesseract-OCR/tessdata`
 
