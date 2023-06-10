@@ -4,6 +4,9 @@ from PIL import Image
 import image_processor as ip
 import os
 from hit import Hit
+import easyocr
+
+
 
 def process_image(image_path, verbose=False):
     ip.isolate_damage(image_path)
@@ -17,19 +20,17 @@ def process_image(image_path, verbose=False):
     
     os.makedirs(temp_dir, exist_ok=True)
     
-    config = (
-    "--user-words CreampuffBOT/ocr/words.txt "
-    "--psm 6 "
-    "-c tessdict_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_#"
-    )
+    reader = easyocr.Reader(['en'], verbose=False)  # Specify the language(s) and set verbose to False
 
-    ocr_username = pytesseract.image_to_string(Image.open(upreprocessed_path), config=config)
-    ocr_damage = pytesseract.image_to_string(Image.open(dpreprocessed_path), config=config)
-    ocr_boss = pytesseract.image_to_string(Image.open(bpreprocessed_path), config=config)
+    ocr_username = reader.readtext(upreprocessed_path)
+    ocr_damage = reader.readtext(dpreprocessed_path)
+    ocr_boss = reader.readtext(bpreprocessed_path)
     
-    ocr_username_lines = ocr_username.splitlines()
-    ocr_damage_lines = ocr_damage.splitlines()
-    ocr_boss_lines = ocr_boss.splitlines()
+    # EasyOCR returns a list of tuples, each containing the coordinates of the text
+    # and the text itself. We extract just the text and join it into a single string.
+    ocr_username_lines = [' '.join(result[1] for result in ocr_username)]
+    ocr_damage_lines = [' '.join(result[1] for result in ocr_damage)]
+    ocr_boss_lines = [' '.join(result[1] for result in ocr_boss)]
     
     hits = [Hit(u, d, b) for u, d, b in zip(ocr_username_lines, ocr_damage_lines, ocr_boss_lines)]
     
@@ -38,11 +39,12 @@ def process_image(image_path, verbose=False):
             print(hit.serialize())
     return hits
 
+
 def main():
     all_hits = []
 
     # Set this to True to process all images in directory, or False to process a single image
-    process_all_images = False  # Change this to False to process single image
+    process_all_images = True  # Change this to False to process single im
 
     path = "CreampuffBOT/imgs"
     if process_all_images:
