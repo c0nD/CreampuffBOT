@@ -5,3 +5,4 @@ Pillow
 PyQt5
 jsonpickle
 pyinstaller
+easyocr
