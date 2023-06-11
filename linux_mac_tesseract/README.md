@@ -8,7 +8,7 @@ To install: please follow this guide.
 https://guides.library.illinois.edu/c.php?g=347520&p=4121425
 
 
-## Setting up trained data language
+## Setting up trained data language (Optional)
 
 The `mikado.traineddata` file is a file that has specifically trained on the Cookie Run: Kingdom font.
 
