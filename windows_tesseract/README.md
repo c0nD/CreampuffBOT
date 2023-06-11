@@ -4,7 +4,7 @@
 If you wish to download them yourself, the version being used is:
 > Tesseract v5.0.0 2021-12-01 14:53
 
-32-bit MD5: 49a55104b9556709dcfb2db1870053b6
+32-bit MD5: 49a55104b9556709dcfb2db1870053b6  
 64-bit MD5: 4282f5e90cd5e498684a397bccd5bcac
 
 You can find them here https://digi.bib.uni-mannheim.de/tesseract/
