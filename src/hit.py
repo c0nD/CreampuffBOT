@@ -8,7 +8,7 @@ class Hit:
         # Remove leading/trailing whitespace
         text = text.strip()
         # Remove commas
-        text = text.replace(",", "")
+        text = text.replace(",", "").replace(".", "")
         return text
 
     def __str__(self):
