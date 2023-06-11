@@ -17,7 +17,7 @@ def process_image(image_path, verbose=False):
     
     os.makedirs(temp_dir, exist_ok=True)
     
-    reader = easyocr.Reader(['en', 'ch_sim'])  # you can change the languages according to your requirement
+    reader = easyocr.Reader(['en', 'ch_sim'], verbose=False)  # you can change the languages according to your requirement
     
     ocr_username = reader.readtext(upreprocessed_path)
     ocr_damage = reader.readtext(dpreprocessed_path)
