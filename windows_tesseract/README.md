@@ -28,7 +28,7 @@ Enter: `tesseract --version`
 So long as you do not get an error, everything should have been properly installed.
 If you do get an error, check to make sure it is properly installed, but more importantly: added to your Path.
 
-## Setting up trained data language
+## Setting up trained data language (Optional)
 
 The `mikado.traineddata` file is a file that has specifically trained on the Cookie Run: Kingdom font. (located in `./ocr`)
 
