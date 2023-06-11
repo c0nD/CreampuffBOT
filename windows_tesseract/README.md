@@ -33,13 +33,3 @@ If you do get an error, check to make sure it is properly installed, but more im
 The `mikado.traineddata` file is a file that has specifically trained on the Cookie Run: Kingdom font. (located in `./ocr`)
 
 > To make it work, place this file in your Tesseract-OCR location (usually): `C:/Program Files/Tesseract-OCR/tessdata`
-
-- Note: if you would like to forgo this process, change `mikado` to `eng` for the `lang` parameter in `image_processing.py`
-
-## Build Information
-
-To build this yourself, you will need the `pyinstaller` library (found in requirements.txt)
-
-From the directory `ToppingOCR/gui_src`, you will input this command
-
-> `pyinstaller --onefile --windowed --paths="<yourdir>\ToppingOCR\src" main.py`
