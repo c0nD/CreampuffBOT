@@ -4,11 +4,13 @@ class Hit:
         self.damage = self.sanitize(damage)
         self.boss = self.serialize_boss(self.sanitize(boss))
 
-    def sanitize(self, text):
+    def sanitize(self, text, verbose=False):
         # Remove leading/trailing whitespace
         text = text.strip()
         # Remove commas
         text = text.replace(",", "").replace(".", "")
+        if verbose:
+            print(text)
         return text
 
     def __str__(self):

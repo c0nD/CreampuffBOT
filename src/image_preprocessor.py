@@ -20,16 +20,13 @@ def isolate_yellow(image):
 
 
 def isolate_red(image):
-    # Convert image from BGR to HSV
-    hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    # Define lower and upper range for salmon-like color in BGR
+    # For salmon color (RGB: 250, 128, 114), BGR would be (114, 128, 250)
+    lower_red = np.array([100, 130, 200]) # Lower threshold
+    upper_red = np.array([180, 160, 255]) # Upper threshold
     
-    # Define lower and upper range for red color in HSV (specific red is  (208,126,127).)
-    # Isolating a 'salmon' like color
-    lower_red = np.array([0, 85, 100])
-    upper_red = np.array([7, 100, 250])
-    
-    # Threshold the HSV image to get only red colors
-    mask = cv2.inRange(hsv_image, lower_red, upper_red)
+    # Threshold the BGR image to get only salmon-like colors
+    mask = cv2.inRange(image, lower_red, upper_red)
     
     # Bitwise-AND mask and original image
     result = cv2.bitwise_and(image, image, mask=mask)
@@ -43,7 +40,7 @@ def isolate_white(image):
     
     # Define lower and upper range for white color in HSV
     lower_white = np.array([0, 0, 235])
-    upper_white = np.array([180, 25, 255])
+    upper_white = np.array([190, 25, 255])
 
     # Threshold the HSV image to get only white colors
     mask = cv2.inRange(hsv_image, lower_white, upper_white)
@@ -64,8 +61,8 @@ def crop_right(image):
 # obtain the second fifth of the image
 def crop_left(image):
     width = image.shape[1]
-    start_x = int(width * 350 / 1920)
-    end_x = int(width * 560 / 1920)
+    start_x = int(width * 385 / 1920)
+    end_x = int(width * 685 / 1920)
     cropped_image = image[:, start_x:end_x]
     return cropped_image
 
@@ -225,3 +222,36 @@ def thick_font(image):
     image = cv2.dilate(image, kernel, iterations=1)
     image = cv2.bitwise_not(image)
     return image
+
+
+def resize_image(img, width, height):
+    # Calculate the target aspect ratio
+    target_aspect = width / height
+    # Calculate the aspect ratio of the input image
+    img_aspect = img.shape[1] / img.shape[0]
+
+    # If the input image's aspect ratio is greater than the target's,
+    # that means it is wider. In this case, resize based on width.
+    if img_aspect > target_aspect:
+        img_resized = cv2.resize(img, (width, int(width / img_aspect)))
+    else:
+        # Otherwise, the input image is taller, so resize based on height.
+        img_resized = cv2.resize(img, (int(height * img_aspect), height))
+    
+    # Calculate the color to use for padding. We'll use the mean color of the image.
+    pad_color = 0
+    
+    # Get the size of the resized image
+    y_resized, x_resized, _ = img_resized.shape
+    
+    # Create a new, blank image with the target size and fill it with the pad color
+    img_target = np.full((height, width, 3), pad_color, dtype=np.uint8)
+    
+    # Compute x and y offsets to center the resized image
+    y_offset = (height - y_resized) // 2
+    x_offset = (width - x_resized) // 2
+    
+    # Insert the resized image into the center of the target image
+    img_target[y_offset:y_offset+y_resized, x_offset:x_offset+x_resized] = img_resized
+    
+    return img_target

@@ -6,6 +6,7 @@ import pandas as pd
 from PIL import Image
 
 def process_image(image_path, verbose=False):
+    
     ip.isolate_damage(image_path)
     ip.isolate_username(image_path)
     ip.isolate_boss(image_path)
@@ -22,7 +23,7 @@ def process_image(image_path, verbose=False):
     ocr_username = reader.readtext(upreprocessed_path)
     ocr_damage = reader.readtext(dpreprocessed_path)
     ocr_boss = reader.readtext(bpreprocessed_path)
-
+    
     hits = [Hit(u[1], d[1], b[1]) for u, d, b in zip(ocr_username, ocr_damage, ocr_boss)]
     
     if verbose:
@@ -47,7 +48,7 @@ def main():
             print("Hit count: ", len(hits))
     else:
         # Process a single image
-        image_file = "damage1.jpg"  # specify the file name here
+        image_file = "Screenshot_20230611_175044_Cookie_Run_Kingdom.png"  # specify the file name here
         img_path = os.path.join(path, image_file)
         hits = process_image(img_path, verbose=False)
         all_hits.extend(hits)
