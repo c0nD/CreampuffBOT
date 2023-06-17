@@ -59,7 +59,7 @@ def main():
                       columns=["Username", "Damage", "Boss"])
 
     # Sorting dataframe by boss and username
-    df_sorted = df.sort_values(by=['Boss', 'Username'])
+    df_sorted = df.sort_values(by=['Boss'])
 
     # Creating output directory if it doesn't exist
     output_dir = 'CreampuffBOT/out'
