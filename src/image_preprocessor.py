@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import easyocr
 
 
 def isolate_yellow(image):
@@ -84,6 +85,14 @@ def crop_boss(image):
     return cropped_image
 
 
+def crop_level(image):
+    width = image.shape[1]
+    start_x = int(width * 600 / 1920)
+    end_x = int(width * 1000 / 1920)
+    cropped_image = image[:, start_x:end_x]
+    return cropped_image
+
+
 def remove_possible_padding(image):
     # Convert the image to grayscale if it's not already
     if len(image.shape) == 3:
@@ -114,6 +123,20 @@ def remove_possible_padding(image):
     new_img = image[y_min:y_max, x_min:x_max]
 
     return new_img
+
+
+def extend_mask_to_right(mask, extend_pixels=50):
+    # Create an array of zeros (black) the same size as the mask
+    extension = np.zeros(mask.shape, dtype=np.uint8)
+
+    # Set the rightmost 'extend_pixels' columns of 'extension' to be white
+    extension[:, -extend_pixels:] = 255
+
+    # Combine the original mask and the extension using a bitwise OR operation
+    extended_mask = cv2.bitwise_or(mask, extension)
+
+    return extended_mask
+
 
 
 def grayscale(image):
