@@ -58,15 +58,12 @@ def main():
     df = pd.DataFrame([(hit.username, hit.damage, hit.boss) for hit in all_hits], 
                       columns=["Username", "Damage", "Boss"])
 
-    # Sorting dataframe by boss and username
-    df_sorted = df.sort_values(by=['Boss'])
-
     # Creating output directory if it doesn't exist
     output_dir = 'CreampuffBOT/out'
     os.makedirs(output_dir, exist_ok=True)
     
     # Saving the dataframe to a csv file
-    df_sorted.to_csv(os.path.join(output_dir, 'output.csv'), index=False)
+    df.to_csv(os.path.join(output_dir, 'output.csv'), index=False)
 
 
 if __name__ == "__main__":
