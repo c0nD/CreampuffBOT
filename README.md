@@ -6,7 +6,7 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 
 ## Install/Build Instructions
 ### Prerequisites
-> [Git](https://git-scm.com/downloads)  
+> [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
 > [Python (>3.0)](https://www.python.org/downloads/) *Note: make sure to add it to PATH (Windows)*  
 > Tesseract -- see below
 
