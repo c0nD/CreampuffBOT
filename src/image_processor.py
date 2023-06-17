@@ -1,7 +1,6 @@
 import cv2
-from display import display
-import image_preprocessor as pi
-
+#from display import display
+from . import image_preprocessor as pi
 
 def isolate_damage(path):
     
