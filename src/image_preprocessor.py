@@ -61,8 +61,8 @@ def crop_right(image):
 # obtain the second fifth of the image
 def crop_left(image):
     width = image.shape[1]
-    start_x = int(width * 385 / 1920)
-    end_x = int(width * 685 / 1920)
+    start_x = int(width * 340 / 1920)
+    end_x = int(width * 650 / 1920)
     cropped_image = image[:, start_x:end_x]
     return cropped_image
 
@@ -82,6 +82,38 @@ def crop_boss(image):
     end_x = int(width * 875 / 1920)
     cropped_image = image[:, start_x:end_x]
     return cropped_image
+
+
+def remove_possible_padding(image):
+    # Convert the image to grayscale if it's not already
+    if len(image.shape) == 3:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    else:
+        gray = image
+
+    # Threshold the grayscale image
+    _, thresh = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+
+    # Find the contours of the thresholded image
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Filter out very small contours based on the area
+    contours = [cnt for cnt in contours if cv2.contourArea(cnt) > 100]
+
+    # If there are no contours left (image was mostly black)
+    if len(contours) == 0:
+        return image
+
+    # Otherwise, find bounding box that fits around all contours
+    x_min = min([cv2.boundingRect(cnt)[0] for cnt in contours])
+    y_min = min([cv2.boundingRect(cnt)[1] for cnt in contours])
+    x_max = max([cv2.boundingRect(cnt)[0] + cv2.boundingRect(cnt)[2] for cnt in contours])
+    y_max = max([cv2.boundingRect(cnt)[1] + cv2.boundingRect(cnt)[3] for cnt in contours])
+
+    # Crop the original image to this bounding box
+    new_img = image[y_min:y_max, x_min:x_max]
+
+    return new_img
 
 
 def grayscale(image):

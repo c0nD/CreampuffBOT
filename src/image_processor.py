@@ -6,7 +6,7 @@ import image_preprocessor as pi
 def isolate_damage(path):
     
     img = cv2.imread(path)
-    
+    img = pi.remove_possible_padding(img)
     
     print("Image Loaded: ", img is not None)
     
@@ -28,6 +28,7 @@ def isolate_damage(path):
 def isolate_username(path):
     
     img = cv2.imread(path)
+    img = pi.remove_possible_padding(img)
     
     img = pi.crop_left(img)
     img = pi.crop_center(img)
@@ -48,6 +49,7 @@ def isolate_username(path):
 def isolate_boss(path):
     
     img = cv2.imread(path)
+    img = pi.remove_possible_padding(img)
     
     img = pi.crop_boss(img)
     img = pi.crop_center(img)
