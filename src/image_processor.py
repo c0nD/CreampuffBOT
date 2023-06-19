@@ -101,7 +101,7 @@ def isolate_level(path, boss_path):
 
         # Increase the height of the bounding box to ensure all text is included
         y -= 10  # Shift the box up a bit
-        h += 20  # Increase the total height a bit
+        h += 25  # Increase the total height a bit
 
         # Ensure we don't go beyond the image boundaries
         y = max(0, y)
@@ -119,4 +119,4 @@ def isolate_level(path, boss_path):
 
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/level.jpg', mask)
-    display('CreampuffBOT/temp/level.jpg')
+    #display('CreampuffBOT/temp/level.jpg')

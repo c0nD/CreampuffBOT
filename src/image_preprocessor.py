@@ -58,7 +58,7 @@ def isolate_white_b(image):
 
     # Define lower and upper range for white color in HSV
     lower_white = np.array([0, 0, 225]) # pure white
-    upper_white = np.array([170, 0, 255]) # pure white
+    upper_white = np.array([170, 5, 255]) # pure white
 
     # Threshold the HSV image to get only white colors
     mask = cv2.inRange(hsv_image, lower_white, upper_white)
