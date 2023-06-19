@@ -35,7 +35,7 @@ def isolate_red(image):
     return result
 
 
-def isolate_white(image):
+def isolate_white_a(image):
     # Convert image from BGR to HSV
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
@@ -50,6 +50,24 @@ def isolate_white(image):
     result = cv2.bitwise_and(image, image, mask=mask)
     
     return result
+
+
+def isolate_white_b(image):
+    # Convert image from BGR to HSV
+    hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    # Define lower and upper range for white color in HSV
+    lower_white = np.array([0, 0, 225]) # pure white
+    upper_white = np.array([170, 0, 255]) # pure white
+
+    # Threshold the HSV image to get only white colors
+    mask = cv2.inRange(hsv_image, lower_white, upper_white)
+
+    # Bitwise-AND mask and original image
+    result = cv2.bitwise_and(image, image, mask=mask)
+
+    return result
+
 
 
 def crop_right(image):

@@ -3,7 +3,7 @@ import image_processor as ip
 import os
 from hit import Hit
 import pandas as pd
-from PIL import Image
+
 
 def process_image(image_path, verbose=False):
     
@@ -29,9 +29,6 @@ def process_image(image_path, verbose=False):
     ocr_boss = reader.readtext(bpreprocessed_path)
     ocr_level = reader.readtext(lpreprocessed_path)
     
-    
-
-    
     hits = [Hit(u[1], d[1], b[1], l[1]) for u, d, b, l in zip(ocr_username, ocr_damage, ocr_boss, ocr_level)]
     
     if verbose:
@@ -56,7 +53,7 @@ def main():
             print("Hit count: ", len(hits))
     else:
         # Process a single image
-        image_file = "IMG_7202.png"  # specify the file name here
+        image_file = "Screenshot_20230616_225820_Cookie_Run_Kingdom.png"  # specify the file name here
         img_path = os.path.join(path, image_file)
         hits = process_image(img_path, verbose=False)
         all_hits.extend(hits)

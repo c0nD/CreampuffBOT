@@ -32,7 +32,7 @@ def isolate_username(path):
     
     img = pi.crop_left(img)
     img = pi.crop_center(img)
-    img = pi.isolate_white(img)
+    img = pi.isolate_white_a(img)
     img = pi.grayscale(img)
     img = pi.binarize(img)
     img = pi.noise_removal(img)
@@ -80,7 +80,7 @@ def isolate_level(path, boss_path):
 
     # Preprocess original image to isolate white pixels
     img_white = pi.crop_center(img)
-    img_white = pi.isolate_white(img_white)
+    img_white = pi.isolate_white_b(img_white)
     img_white = pi.grayscale(img_white)
     img_white = pi.binarize(img_white)
     img_white = pi.noise_removal(img_white)
@@ -119,4 +119,4 @@ def isolate_level(path, boss_path):
 
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/level.jpg', mask)
-    #display('CreampuffBOT/temp/level.jpg')
+    display('CreampuffBOT/temp/level.jpg')
