@@ -121,3 +121,20 @@ def isolate_level(path, boss_path):
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/level.jpg', mask)
     #display('CreampuffBOT/temp/level.jpg')
+
+
+def isolate_kills(path):
+    
+    img = cv2.imread(path)
+    img = pi.remove_possible_padding(img)
+    img = pi.isolate_green(img)
+    
+    img = pi.crop_kills(img)
+    img = pi.grayscale(img)
+    img = pi.binarize(img)
+    img = pi.noise_removal(img)
+    img = pi.add_padding(img, left=100, right=50)
+    
+    # Save & display image
+    cv2.imwrite('CreampuffBOT/temp/kills.jpg', img)
+    #display('CreampuffBOT/temp/kills.jpg')

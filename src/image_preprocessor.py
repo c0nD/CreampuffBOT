@@ -69,6 +69,23 @@ def isolate_white_b(image):
     return result
 
 
+def isolate_green(image):
+    # Convert image from BGR to HSV
+    hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    # Define lower and upper range for green color in HSV
+    lower_green = np.array([30, 155, 200])
+    upper_green = np.array([45, 220, 255])
+
+    # Threshold the HSV image to get only green colors
+    mask = cv2.inRange(hsv_image, lower_green, upper_green)
+
+    # Bitwise-AND mask and original image
+    result = cv2.bitwise_and(image, image, mask=mask)
+    
+    return result
+
+
 
 def crop_right(image):
     width = image.shape[1]
@@ -92,6 +109,14 @@ def crop_center(image):
     start_y = height // 6
     end_y = height - start_y
     cropped_image = image[start_y:end_y, :]
+    return cropped_image
+
+
+def crop_kills(image):
+    width = image.shape[1]
+    start_x = 0
+    end_x = int(width * 600 / 1920)
+    cropped_image = image[:, start_x:end_x]
     return cropped_image
 
 

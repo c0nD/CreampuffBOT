@@ -1,9 +1,10 @@
 class Hit:
-    def __init__(self, username, damage, boss, level):
+    def __init__(self, username, damage, boss, level, kills):
         self.username = self.sanitize(username)
         self.damage = self.sanitize_number(self.sanitize(damage))
         self.boss = self.serialize_boss(self.sanitize(boss))
         self.level = self.sanitize_number(self.sanitize(level))
+        self.kills = kills
 
     def sanitize(self, text, verbose=False):
         # Remove leading/trailing whitespace
@@ -22,14 +23,15 @@ class Hit:
         return text
 
     def __str__(self):
-        return f"Username: {self.username}, Damage: {self.damage}, Boss: {self.boss}, Level: {self.level}"
+        return f"Username: {self.username}, Damage: {self.damage}, Boss: {self.boss}, Level: {self.level}, Kills: {self.kills}"
 
     def serialize(self):
         return {
             "username": self.username,
             "damage": self.damage,
             "boss": self.boss,
-            "level": self.level
+            "level": self.level,
+            "kills": self.kills
         }
 
     def serialize_boss(self, boss):
