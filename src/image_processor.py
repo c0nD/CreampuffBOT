@@ -116,6 +116,7 @@ def isolate_level(path, boss_path):
     # Add padding
     mask = pi.add_padding(mask, left=100, right=50)
     mask = pi.crop_level(mask)
+    mask = pi.noise_removal(mask)
 
     # Save & display image
     cv2.imwrite('CreampuffBOT/temp/level.jpg', mask)

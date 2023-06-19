@@ -53,7 +53,7 @@ def main():
             print("Hit count: ", len(hits))
     else:
         # Process a single image
-        image_file = "Screenshot_20230616_225820_Cookie_Run_Kingdom.png"  # specify the file name here
+        image_file = "Screenshot_20230613_185711_Cookie_Run_Kingdom.png"  # specify the file name here
         img_path = os.path.join(path, image_file)
         hits = process_image(img_path, verbose=False)
         all_hits.extend(hits)
