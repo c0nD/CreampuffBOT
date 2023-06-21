@@ -29,12 +29,16 @@ import torch
 torch.cuda.is_available()
 ```
 
-### Linux/Mac (Tesseract)
-- Please check out either `linux_mac_tesseract` for instructions on how to set up tesseract and the custom font training data for Linux/Mac Systems
 
-### Windows (Tesseract)
-- Please check out `windows_tesseract` for instructions on how to set up tesseract and the custom font training data for Linux/Mac Systems
+## Tesseract OCR Install
+- Tesseract OCR will be used in this project along with EasyOCR to improve runtime performance. Because of this, you will need to have it installed
+for it to properly run. To properly install it, please check below and follow the given instructions for your operating system.
+### Linux/MacOS
+- Please check out `linux_mac_tesseract` for instructions on how to set up tesseract for a Linux/Mac system.
+### Windows
+- Please check out `windows_tesseract` for instructions on how to set up tesseract for a Windows system.
 
-### Dependencies
+## Dependencies
+- Tesseract (see above)
 - To install the Python dependencies, run the following in your terminal from the root directory `./CreampuffBOT`
 > `pip3 install -r requirements.txt`
