@@ -8,14 +8,12 @@ import cv2
 
 
 def process_image(image_path, verbose=False):
-    
     ip.isolate_damage(image_path)
     ip.isolate_username(image_path)
     ip.isolate_boss(image_path)
     ip.isolate_level(image_path, 'CreampuffBOT/temp/boss.jpg')
     ip.isolate_kills(image_path)
     ip.crop_boss('CreampuffBOT/temp/boss.jpg')  # correcting to actual boss name after isolating level
-
     
     temp_dir = "CreampuffBOT/temp/"
     upreprocessed_path = os.path.join(temp_dir, "username.jpg")
@@ -23,7 +21,6 @@ def process_image(image_path, verbose=False):
     bpreprocessed_path = os.path.join(temp_dir, "boss.jpg")
     lpreprocessed_path = os.path.join(temp_dir, "level.jpg")
     kpreprocessed_path = os.path.join(temp_dir, "kills.jpg")
-    
     
     os.makedirs(temp_dir, exist_ok=True)
     
@@ -34,8 +31,8 @@ def process_image(image_path, verbose=False):
     ocr_boss = reader.readtext(bpreprocessed_path)
     ocr_level = reader.readtext(lpreprocessed_path)
     ocr_kills = process_kills_image(kpreprocessed_path)
-    
-# Create hits from OCR data and kill data
+
+    # Create hits from OCR data and kill data
     hits = [Hit(u[1], d[1], b[1], l[1], k) for u, d, b, l, k in zip(ocr_username, ocr_damage, ocr_boss, ocr_level, ocr_kills)]    
     if verbose:
         for hit in hits:
@@ -75,41 +72,28 @@ def process_kills_image(image_path):
     return [top_found, middle_found, bottom_found]
 
 
-def main():
-    print(os.getcwd())
+def process_images(input_dir, output_file, progress_callback, status_callback):
     all_hits = []
 
-    # Set this to True to process all images in directory, or False to process a single image
-    process_all_images = True  # Change this to False to process single im
-
-    path = "CreampuffBOT/imgs"
-    if process_all_images:
-        # Process all images in the directory
-        for img_file in os.listdir(path):
-            img_path = os.path.join(path, img_file)
-            hits = process_image(img_path, verbose=False)
-            all_hits.extend(hits)  # add hits to master list
-            print("Hit count: ", len(hits))
-    else:
-        # Process a single image
-        image_file = "IMG_7202.png"  # specify the file name here
-        img_path = os.path.join(path, image_file)
+    # Process all images in the directory
+    for img_file in os.listdir(input_dir):
+        img_path = os.path.join(input_dir, img_file)
+        status_callback(f"Processing image: {img_file}")
         hits = process_image(img_path, verbose=False)
-        all_hits.extend(hits)
+        all_hits.extend(hits)  # add hits to master list
+        status_callback(f"Finished processing image: {img_file}")
+        progress_callback()
+
+    # Update status to indicate OCR is done
+    status_callback("OCR finished. Preparing data for CSV export.")
 
     # You now have a list of all Hit objects in all_hits
     # Creating a pandas dataframe
     df = pd.DataFrame([(hit.username, hit.damage, hit.boss, hit.level, hit.kills) for hit in all_hits], 
                       columns=["Username", "Damage", "Boss", "Level", "Killed"])
 
-    # Creating output directory if it doesn't exist
-    output_dir = 'CreampuffBOT/out'
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Saving the dataframe to a csv file
-    df.to_csv(os.path.join(output_dir, 'output.csv'), index=False)
-    print("Finished processing images")
+    # Saving the dataframe to a CSV file
+    df.to_csv(output_file, index=False)
 
-
-if __name__ == "__main__":
-    main()
+    # Update status to indicate CSV export is done
+    status_callback("Finished processing images. CSV file exported.")

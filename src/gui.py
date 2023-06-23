@@ -1,9 +1,14 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QProgressBar, QLabel, QFileDialog, QTextEdit
 from PyQt5.QtCore import Qt
+import main
+import os
 
 class MainWindow(QWidget):
+
     def __init__(self):
         super(MainWindow, self).__init__()
+
+        self.setFixedSize(500, 350)
 
         # Layout
         layout = QVBoxLayout()
@@ -84,10 +89,25 @@ class MainWindow(QWidget):
         self.status.append(f'Output file: {self.output_file}')
 
     def start_processing(self):
-        self.status.append('Processing started...')
-        # Call your image processing function here
+        if hasattr(self, 'input_dir') and hasattr(self, 'output_file'):
+            # Calculate the total number of images in the input directory
+            total_images = len([name for name in os.listdir(self.input_dir) if os.path.isfile(os.path.join(self.input_dir, name))])
+            self.progress.setRange(0, total_images)
+            progress = 0
+            self.status.append('Processing started...')
+            def progress_callback():
+                nonlocal progress
+                progress += 1
+                self.progress.setValue(progress)
+            def status_callback(status):
+                self.status.append(status)
+            # Call process_images here, passing progress_callback and status_callback
+            main.process_images(self.input_dir, self.output_file, progress_callback, status_callback)
+        else:
+            self.status.append('Please choose an input folder and an output file before starting.')
 
 app = QApplication([])
 window = MainWindow()
+window.setWindowTitle('CreampuffBOT')  # Set the window title to 'CreampuffBOT'
 window.show()
 app.exec_()
