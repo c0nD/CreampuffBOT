@@ -76,6 +76,7 @@ def process_kills_image(image_path):
 
 
 def main():
+    print(os.getcwd())
     all_hits = []
 
     # Set this to True to process all images in directory, or False to process a single image
