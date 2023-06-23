@@ -1,5 +1,5 @@
 # CreampuffBOT
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg)]  
 CRK Guild Battle OCR Data Logger
 
 ## Purpose
