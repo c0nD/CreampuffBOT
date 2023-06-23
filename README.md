@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg) ![tesseract: 5.0.0](https://img.shields.io/badge/tesseract-5.0.0-yellow.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
 ## Purpose
 **CRK Guild Battle OCR Data Logger**  
+
 This bot/program's purpose is to take a folder of screenshots containing guild battle hits from **Cookie Run: Kingdom** and serialize them into a `.csv` file to perform further data analysis on.
 
 ## Install/Build Instructions
