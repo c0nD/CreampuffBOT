@@ -1,5 +1,5 @@
 # CreampuffBOT
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg) ![tesseract: 5.0.0](https://img.shields.io/badge/tesseract-5.0.0-yellow.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
 **CRK Guild Battle OCR Data Logger**  
 
 This bot/program's purpose is to take a folder of screenshots containing guild battle hits from **Cookie Run: Kingdom** and serialize them into a `.csv` file to perform further data analysis on.
@@ -8,16 +8,14 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 ### Prerequisites
 > [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
 > [Python (>3.0)](https://www.python.org/downloads/) *Note: make sure to add it to PATH (Windows)*  
-> Tesseract -- see below
 
 ### Dependencies
-- Tesseract (see above)
 - To install the Python dependencies, run the following in your terminal from the root directory `./CreampuffBOT`
 > `pip3 install -r requirements.txt`
 
 ### Building
 If you wish to examine the source code yourself and build it instead of downloading the released executable you can perform the following:
-- From the `src` folder: `pyinstaller --onefile gui.py`
+- From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
 
 ## GPU / CUDA Info
 - This program is intended to be run on CUDA compatible GPUs. Because this program does a lot with image processing: having a GPU that can be properly taken
@@ -36,12 +34,3 @@ The command for Windows + CUDA 11.7 was `pip3 install torch torchvision torchaud
 import torch
 torch.cuda.is_available()
 ```
-
-
-## Tesseract OCR Install
-- Tesseract OCR will be used in this project along with EasyOCR to improve runtime performance. Because of this, you will need to have it installed
-for it to properly run. To properly install it, please check below and follow the given instructions for your operating system.
-### Linux/MacOS
-- Please check out `linux_mac_tesseract` for instructions on how to set up tesseract for a Linux/Mac system.
-### Windows
-- Please check out `windows_tesseract` for instructions on how to set up tesseract for a Windows system.
