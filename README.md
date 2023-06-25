@@ -14,8 +14,11 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 > `pip3 install -r requirements.txt`
 
 ### Building
-If you wish to examine the source code yourself and build it instead of downloading the released executable you can perform the following:
-- From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
+If you wish to examine the source code yourself and build it into an executable, you can do so with the following command from the `CreampuffBOT/src` directory:
+> `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
+
+If you wish to simply run it normally, you can run the following command from the `CreampuffBOT/src` directory:
+> `python gui.py`
 
 ## GPU / CUDA Info
 - This program is intended to be run on CUDA compatible GPUs. Because this program does a lot with image processing: having a GPU that can be properly taken
