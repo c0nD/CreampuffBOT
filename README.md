@@ -1,6 +1,6 @@
 # CreampuffBOT
 
-<a href="https://ibb.co/Tbx8mWV"><img src="https://i.ibb.co/Jyw753f/Choir-Sweetheart.png" alt="Choir-Sweetheart" border="0" width="650" height="550"></a>
+<a href="https://ibb.co/Tbx8mWV"><img src="https://i.ibb.co/Jyw753f/Choir-Sweetheart.png" alt="Choir-Sweetheart" border="0" width="325" height="275"></a>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
 **CRK Guild Battle OCR Data Logger**  
