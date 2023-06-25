@@ -16,7 +16,7 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 ### Building
 **(Recommended)**
 - If you wish to simply run it normally, you can run the following command from the `CreampuffBOT/src` directory:
-> `python gui.py`
+> `python gui.py`  
 **(Not Recommended)** *python is not typically a compiled language*
 - If you wish to examine the source code yourself and build it into an executable, you can do so with the following command from the `CreampuffBOT/src` directory:
 > `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
