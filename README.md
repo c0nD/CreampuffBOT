@@ -8,10 +8,12 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 ### Prerequisites
 > [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
 > [Python (>3.0)](https://www.python.org/downloads/) *Note: make sure to add it to PATH (Windows)*  
+> [Poetry](https://python-poetry.org/docs/#installation)  
+<sub><sup>*if Python is installed, you can do `pip install poetry` and check your installation with `poetry --version`*</sup></sub>
 
 ### Dependencies
-- To install the Python dependencies, run the following in your terminal from the root directory `./CreampuffBOT`
-> `pip3 install -r requirements.txt`
+- To install the Python dependencies using Poetry, navigate to the project root directory `./CreampuffBOT` and run:
+> `poetry install`
 
 ### Building
 If you wish to examine the source code yourself and build it instead of downloading the released executable you can perform the following:
@@ -22,6 +24,7 @@ If you wish to examine the source code yourself and build it instead of download
 advantage of by the program will dramatically improve runtime.  
 - *Is my GPU CUDA compatible?* -- Most NVIDIA graphics cards *are* CUDA compatible. AMD cards are *not* compatible. Intel cards also do not currently support CUDA.
 For more information and to check if your card is compatible, check here: https://developer.nvidia.com/cuda-gpus
+
 
 ### CUDA Installations
 To take advantage of your GPU, you will need to have a few things downloaded:

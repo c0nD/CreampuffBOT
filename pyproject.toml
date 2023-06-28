@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "creampuff-bot"
+version = "1.0.0"
+description = "CookierunRun: Kingdom Guild Battle OCR Logger"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "creampuff_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+opencv-python = "^4.7.0.72"
+matplotlib = "^3.7.1"
+Pillow = "^9.5.0"
+PyQt5 = "^5.15.9"
+pandas = "^2.0.2"
+easyocr = "^1.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
