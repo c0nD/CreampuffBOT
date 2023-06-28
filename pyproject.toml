@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "creampuff-bot"
 version = "1.0.0"
-description = "CookierunRun: Kingdom Guild Battle OCR Logger"
-authors = ["Your Name <you@example.com>"]
+description = "CookieRun: Kingdom Guild Battle OCR Logger"
+authors = ["c0nD <admin@c0nD.dev>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "creampuff_bot"}]

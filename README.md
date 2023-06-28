@@ -9,6 +9,7 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 > [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
 > [Python (>3.0)](https://www.python.org/downloads/) *Note: make sure to add it to PATH (Windows)*  
 > [Poetry](https://python-poetry.org/docs/#installation)  
+
 <sub><sup>*if Python is installed, you can do `pip install poetry` and check your installation with `poetry --version`*</sup></sub>
 
 ### Dependencies
@@ -16,7 +17,7 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 > `poetry install`
 
 ### Building
-If you wish to examine the source code yourself and build it instead of downloading the released executable you can perform the following:
+If you wish to examine the source code yourself and build it into an untested executable you can perform the following:
 - From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
 
 ## GPU / CUDA Info
