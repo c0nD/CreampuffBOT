@@ -7,6 +7,7 @@ def isolate_damage(path):
     
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
+    img = pi.resize_image_to_aspect_ratio(img)
     
     print("Image Loaded: ", img is not None)
     
@@ -29,6 +30,7 @@ def isolate_username(path):
     
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
+    img = pi.resize_image_to_aspect_ratio(img)
     
     img = pi.crop_left(img)
     img = pi.crop_center(img)
@@ -50,6 +52,7 @@ def isolate_boss(path):
     
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
+    img = pi.resize_image_to_aspect_ratio(img)
     img = pi.crop_center(img)
     
     img = pi.isolate_red(img)
@@ -74,6 +77,7 @@ def isolate_level(path, boss_path):
     # Load the image
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
+    img = pi.resize_image_to_aspect_ratio(img)
     
     # Load the boss image
     boss_img = cv2.imread(boss_path, cv2.IMREAD_GRAYSCALE)  # Load as grayscale
@@ -127,6 +131,7 @@ def isolate_kills(path):
     
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
+    img = pi.resize_image_to_aspect_ratio(img)
     img = pi.isolate_green(img)
     
     img = pi.crop_kills(img)

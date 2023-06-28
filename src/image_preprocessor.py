@@ -223,6 +223,44 @@ def remove_border(image):
     x, y, w, h = cv2.boundingRect(cnt)
     crop = image[y:y + h, x:x + w]
     return crop
+
+
+def resize_image_to_aspect_ratio(image, target_width=2270, target_height=1080):
+    # Calculate aspect ratio
+    aspect_ratio = target_width / target_height
+
+    # Get current image shape
+    img_height, img_width = image.shape[:2]
+
+    # Calculate the aspect ratio of current image
+    img_aspect_ratio = img_width / img_height
+
+    # Based on the aspect ratio, resize the image
+    if img_aspect_ratio > aspect_ratio:
+        # If image is wide, scale based on width
+        new_width = target_width
+        new_height = int(new_width / img_aspect_ratio)
+    else:
+        # If image is tall or equal to target, scale based on height
+        new_height = target_height
+        new_width = int(new_height * img_aspect_ratio)
+
+    # Resize the image
+    resized_img = cv2.resize(image, (new_width, new_height))
+
+    # Now we need to pad the image to meet our target size
+    # Calculate the padding values
+    delta_width = target_width - new_width
+    delta_height = target_height - new_height
+    top, bottom = delta_height // 2, delta_height - (delta_height // 2)
+    left, right = delta_width // 2, delta_width - (delta_width // 2)
+
+    # Apply the padding
+    color = [0, 0, 0]  # black
+    final_img = cv2.copyMakeBorder(resized_img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)
+
+    return final_img
+
     
     
 def remove_largest_bounding_box(image):
