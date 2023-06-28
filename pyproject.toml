@@ -5,7 +5,6 @@ description = "CookieRun: Kingdom Guild Battle OCR Logger"
 authors = ["c0nD <admin@c0nD.dev>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "creampuff_bot"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
