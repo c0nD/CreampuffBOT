@@ -1,5 +1,8 @@
 # CreampuffBOT
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-blue.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
+
+<a href="https://ibb.co/Tbx8mWV"><img src="https://i.ibb.co/Jyw753f/Choir-Sweetheart.png" alt="Choir-Sweetheart" border="0" width="325" height="275"></a>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-yellow.svg) ![poetry: 1.5+](https://img.shields.io/badge/poetry-1.5+-blue.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
 **CRK Guild Battle OCR Data Logger**  
 
 This bot/program's purpose is to take a folder of screenshots containing guild battle hits from **Cookie Run: Kingdom** and serialize them into a `.csv` file to perform further data analysis on.
@@ -16,8 +19,13 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 > `poetry install`
 
 ### Building
-If you wish to examine the source code yourself and build it instead of downloading the released executable you can perform the following:
-- From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
+**(Recommended)**
+- If you wish to simply run it normally, you can run the following command from the `CreampuffBOT/src` directory:
+> `python gui.py`  
+
+**(Not Recommended)** <sup><sub>*python is not typically a compiled language*</sub></sup>  
+- If you wish to examine the source code yourself and build it into an executable, you can do so with the following command from the `CreampuffBOT/src` directory:
+> `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
 
 ## GPU / CUDA Info
 - This program is intended to be run on CUDA compatible GPUs. Because this program does a lot with image processing: having a GPU that can be properly taken
