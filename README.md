@@ -4,6 +4,8 @@
 
 This bot/program's purpose is to take a folder of screenshots containing guild battle hits from **Cookie Run: Kingdom** and serialize them into a `.csv` file to perform further data analysis on.
 
+[Example output](https://pastebin.com/JWKAuT4M) for an average week's worth of hits.
+
 ## Install/Build Instructions
 ### Prerequisites
 > [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
