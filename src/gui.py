@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QProgressBar, QLabel, QFileDialog, QTextEdit
 from PyQt5.QtCore import Qt
-import main
+import driver
 import os
 
 class MainWindow(QWidget):
@@ -102,7 +102,7 @@ class MainWindow(QWidget):
             def status_callback(status):
                 self.status.append(status)
             # Call process_images here, passing progress_callback and status_callback
-            main.process_images(self.input_dir, self.output_file, progress_callback, status_callback)
+            driver.process_images(self.input_dir, self.output_file, progress_callback, status_callback)
         else:
             self.status.append('Please choose an input folder and an output file before starting.')
 
