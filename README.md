@@ -16,7 +16,8 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 
 ### Dependencies
 - To install the Python dependencies using Poetry, navigate to the project root directory `./CreampuffBOT` and run:
-> `poetry install`  
+> `poetry install`
+
 <sub><sup>*if this doesn't work, you can do `pip install -r requirements.txt`*</sup></sub>  
 
 
