@@ -37,7 +37,8 @@ To take advantage of your GPU, you will need to have a few things downloaded:
 1. Your drivers should be up to date. https://www.nvidia.com/download/index.aspx
 2. The CUDA toolkit needs to be installed. https://developer.nvidia.com/cuda-toolkit
 3. PyTorch (CUDA) must be installed. https://pytorch.org/get-started/locally/  
-The command for Windows + CUDA 11.7 was `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117` -- this may vary.
+The command for Windows + CUDA 11.7 was `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117` -- this may vary.  
+
 *NOTE: If you installed dependencies to a virtual environment with `poetry`, please do `poetry shell` before running this command
 - To check your installation, you can run these two commands in a python shell to test if you can successfully utilize your GPU with this program.
 ```
