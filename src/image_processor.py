@@ -11,7 +11,7 @@ def isolate_damage(path):
     
     print("Image Loaded: ", img is not None)
     
-    cv2.imwrite('CreampuffBOT/temp/damage.jpg', img)
+    cv2.imwrite('temp/damage.jpg', img)
     img = pi.crop_right(img)  # right quarter
     img = pi.crop_center(img)  # top/bottom 1/6
     img = pi.isolate_yellow(img)
@@ -22,7 +22,7 @@ def isolate_damage(path):
     
     
     # Save & display image
-    cv2.imwrite('CreampuffBOT/temp/damage.jpg', img)
+    cv2.imwrite('temp/damage.jpg', img)
     #display('CreampuffBOT/temp/damage.jpg')
     
     
@@ -44,7 +44,7 @@ def isolate_username(path):
     img = pi.sharpen_image(img)
     
     # Save & display image
-    cv2.imwrite('CreampuffBOT/temp/username.jpg', img)
+    cv2.imwrite('temp/username.jpg', img)
     #display('CreampuffBOT/temp/username.jpg')
     
     
@@ -62,14 +62,14 @@ def isolate_boss(path):
     img = pi.add_padding(img, left=100, right=50)
     
     # Save & display image
-    cv2.imwrite('CreampuffBOT/temp/boss.jpg', img)
+    cv2.imwrite('temp/boss.jpg', img)
     #display('CreampuffBOT/temp/boss.jpg')
     
     
 def crop_boss(path):
     img = cv2.imread(path)
     img = pi.crop_boss(img)
-    cv2.imwrite('CreampuffBOT/temp/boss.jpg', img)
+    cv2.imwrite('temp/boss.jpg', img)
     
     
 def isolate_level(path, boss_path):
@@ -123,7 +123,7 @@ def isolate_level(path, boss_path):
     mask = pi.noise_removal(mask)
 
     # Save & display image
-    cv2.imwrite('CreampuffBOT/temp/level.jpg', mask)
+    cv2.imwrite('temp/level.jpg', mask)
     #display('CreampuffBOT/temp/level.jpg')
 
 
@@ -141,5 +141,5 @@ def isolate_kills(path):
     img = pi.add_padding(img, left=100, right=50)
     
     # Save & display image
-    cv2.imwrite('CreampuffBOT/temp/kills.jpg', img)
+    cv2.imwrite('temp/kills.jpg', img)
     #display('CreampuffBOT/temp/kills.jpg')
