@@ -18,6 +18,9 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 - To install the Python dependencies using Poetry, navigate to the project root directory `./CreampuffBOT` and run:
 > `poetry install`
 
+<sub><sup>*if this doesn't work, you can do `pip install -r requirements.txt`*</sup></sub>  
+
+
 ### Building
 If you wish to examine the source code yourself and build it into an untested executable you can perform the following:
 - From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
@@ -34,7 +37,9 @@ To take advantage of your GPU, you will need to have a few things downloaded:
 1. Your drivers should be up to date. https://www.nvidia.com/download/index.aspx
 2. The CUDA toolkit needs to be installed. https://developer.nvidia.com/cuda-toolkit
 3. PyTorch (CUDA) must be installed. https://pytorch.org/get-started/locally/  
-The command for Windows + CUDA 11.7 was `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117` -- this may vary.
+The command for Windows + CUDA 11.7 was `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117` -- this may vary.  
+
+*NOTE: If you installed dependencies to a virtual environment with `poetry`, please do `poetry shell` before running this command
 - To check your installation, you can run these two commands in a python shell to test if you can successfully utilize your GPU with this program.
 ```
 import torch
