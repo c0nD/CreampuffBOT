@@ -72,6 +72,32 @@ def compare_to_template(video_path, template_path):
     video.release()
     
     
+def remove_duplicate_frames(output_dir):
+    # Get all saved frame numbers
+    frames = [f for f in os.listdir(output_dir) if f.startswith("frame_")]
+    frame_numbers = sorted([int(f.split('_')[1].split('.')[0]) for f in frames])
+
+    if not frame_numbers:
+        return
+
+    to_keep = []
+    start = frame_numbers[0]
+    for i in range(1, len(frame_numbers)):
+        if frame_numbers[i] - frame_numbers[i-1] > 1:
+            end = frame_numbers[i-1]
+            middle = (start + end) // 2
+            to_keep.append(f'frame_{middle}.png')
+            start = frame_numbers[i]
+
+    # Handle the last sequence
+    end = frame_numbers[-1]
+    middle = (start + end) // 2
+    to_keep.append(f'frame_{middle}.png')
+
+    # Remove all frames not in to_keep
+    for frame_file in frames:
+        if frame_file not in to_keep:
+            os.remove(os.path.join(output_dir, frame_file))
     
     
 
@@ -79,3 +105,5 @@ def compare_to_template(video_path, template_path):
 process_video('CreampuffBOT/temp/test_video.mp4', 'CreampuffBOT/temp/test_out.mp4')
 print("Done processing video")
 compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
+print("Done comparing to template.. removing duplicate frames")
+remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
