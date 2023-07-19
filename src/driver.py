@@ -11,11 +11,11 @@ def process_image(image_path, verbose=False):
     ip.isolate_damage(image_path)
     ip.isolate_username(image_path)
     ip.isolate_boss(image_path)
-    ip.isolate_level(image_path, 'temp/boss.jpg')
+    ip.isolate_level(image_path, 'CreampuffBOT/temp/boss.jpg')
     ip.isolate_kills(image_path)
-    ip.crop_boss('temp/boss.jpg')  # correcting to actual boss name after isolating level
+    ip.crop_boss('CreampuffBOT/temp/boss.jpg')  # correcting to actual boss name after isolating level
     
-    temp_dir = "temp/"
+    temp_dir = "CreampuffBOT/temp/"
     upreprocessed_path = os.path.join(temp_dir, "username.jpg")
     dpreprocessed_path = os.path.join(temp_dir, "damage.jpg")
     bpreprocessed_path = os.path.join(temp_dir, "boss.jpg")
