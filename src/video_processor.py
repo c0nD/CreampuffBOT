@@ -100,10 +100,30 @@ def remove_duplicate_frames(output_dir):
             os.remove(os.path.join(output_dir, frame_file))
     
     
+def sliding_window(output_dir):
+    frames = sorted([f for f in os.listdir(output_dir) if f.startswith("frame_")])
+
+    to_delete = []
+    window_size = 3
+
+    for i in range(0, len(frames) - window_size + 1, window_size):
+        window = frames[i: i + window_size]
+        
+        if i == 0:  # If it's the first window, don't delete the first frame
+            to_delete.extend(window[1:-1])
+        elif i == len(frames) - window_size:  # If it's the last window, don't delete the last frame
+            to_delete.extend(window[:-1])
+        else:
+            to_delete.extend(window[:-1])
 
 
 process_video('CreampuffBOT/temp/test_video.mp4', 'CreampuffBOT/temp/test_out.mp4')
 print("Done processing video")
+
 compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
 print("Done comparing to template.. removing duplicate frames")
+
 remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
+print("Done removing duplicates .. sliding window across screenshots")
+
+sliding_window('CreampuffBOT/temp/vid_imgs')
