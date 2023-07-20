@@ -7,7 +7,7 @@ import numpy as np
 import cv2
 
 
-def process_image(image_path, verbose=False):
+def process_image(image_path, verbose=True):
     ip.isolate_damage(image_path)
     ip.isolate_username(image_path)
     ip.isolate_boss(image_path)
@@ -80,6 +80,7 @@ def process_images(input_dir, output_file, progress_callback, status_callback):
         img_path = os.path.join(input_dir, img_file)
         status_callback(f"Processing image: {img_file}")
         hits = process_image(img_path, verbose=False)
+        hits.reverse()
         all_hits.extend(hits)  # add hits to master list
         status_callback(f"Finished processing image: {img_file}")
         progress_callback()
