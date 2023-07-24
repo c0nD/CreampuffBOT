@@ -80,27 +80,17 @@ def process_images(input_dir, output_file, progress_callback, status_callback):
         img_path = os.path.join(input_dir, img_file)
         status_callback(f"Processing image: {img_file}")
         hits = process_image(img_path, verbose=False)
-        hits.reverse()
+        hits.reverse()  # Reversing the order of hits for each image
         all_hits.extend(hits)  # add hits to master list
         status_callback(f"Finished processing image: {img_file}")
         progress_callback()
-
-    # Post-processing to remove duplicate damage entries for specific bosses
-    seen = set()
-    unique_hits = []
-
-    for hit in all_hits:
-        identifier = (hit.damage, hit.boss)  # Create an identifier based on damage and boss
-        if identifier not in seen:
-            unique_hits.append(hit)
-            seen.add(identifier)
 
     # Update status to indicate OCR is done
     status_callback("OCR finished. Preparing data for CSV export.")
 
     # Creating a pandas dataframe
-    df = pd.DataFrame([(hit.username, hit.damage, hit.boss, hit.level, hit.kills) for hit in unique_hits], 
-                      columns=["Username", "Damage", "Boss", "Level", "Killed"])
+    df = pd.DataFrame([(hit.username, hit.boss, hit.level, hit.damage, hit.kills) for hit in all_hits], 
+                      columns=["Name", "Boss", "Boss Lvl", "Dmg", "K/H"])
 
     # Saving the dataframe to a CSV file
     df.to_csv(output_file, index=False)
