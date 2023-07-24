@@ -88,6 +88,8 @@ def process_images(input_dir, output_file, progress_callback, status_callback):
     # Update status to indicate OCR is done
     status_callback("OCR finished. Preparing data for CSV export.")
 
+    for hit in all_hits:
+        hit.kills = 'K' if hit.kills else 'H'
     # Creating a pandas dataframe
     df = pd.DataFrame([(hit.username, hit.boss, hit.level, hit.damage, hit.kills) for hit in all_hits], 
                       columns=["Name", "Boss", "Boss Lvl", "Dmg", "K/H"])

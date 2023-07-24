@@ -69,7 +69,7 @@ def isolate_boss(path):
 def crop_boss(path):
     img = cv2.imread(path)
     img = pi.crop_boss(img)
-    cv2.imwrite('temp/boss.jpg', img)
+    cv2.imwrite('CreampuffBOT/temp/boss.jpg', img)
     
     
 def isolate_level(path, boss_path):
