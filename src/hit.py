@@ -36,9 +36,9 @@ class Hit:
 
     def serialize_boss(self, boss):
         bosses = {
-            'RVD': ["red", "velvet", "dragon"],
-            'TLA': ["living", "abyss"],
-            'AOD': ["avatar", "of", "destiny"]
+            'RVD': ["red", "velvet", "dragon", "redvelvetdragon", "redvelvet", "velvetdragon"],
+            'TLA': ["living", "abyss", "the", "livingabyss", "thelivingabyss", "theliving"],
+            'AOD': ["avatar", "of", "destiny", "avatarofdestiny", "avatarof" "ofdestiny"],
         }
         
         for key, values in bosses.items():
