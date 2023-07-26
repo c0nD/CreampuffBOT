@@ -101,8 +101,8 @@ def process_images(input_dir, output_file, progress_callback, status_callback):
     # Creating a pandas dataframe
     df = pd.DataFrame([(hit.username, hit.boss, hit.level, hit.damage, hit.kills) for hit in all_hits], 
                       columns=["Name", "Boss", "Boss Lvl", "Dmg", "K/H"])
-
-    # Saving the dataframe to a CSV file
+    df = df.groupby('Boss').apply(lambda x: x.drop_duplicates(subset='Dmg')).reset_index(drop=True)
+    df['Counter'] = range(1, len(df) + 1)
     df.to_csv(output_file, index=False)
 
     # Update status to indicate CSV export is done
