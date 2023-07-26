@@ -44,7 +44,7 @@ def isolate_username(path):
     img = pi.sharpen_image(img)
     
     # Save & display image
-    cv2.imwrite('temp/username.jpg', img)
+    cv2.imwrite('CreampuffBOT/temp/username.jpg', img)
     #display('CreampuffBOT/temp/username.jpg')
     
     

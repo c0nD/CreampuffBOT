@@ -79,7 +79,7 @@ def process_images(input_dir, output_file, progress_callback, status_callback):
     for img_file in os.listdir(input_dir):
         img_path = os.path.join(input_dir, img_file)
         status_callback(f"Processing image: {img_file}")
-        hits = process_image(img_path, verbose=False)
+        hits = process_image(img_path, verbose=True)
         hits.reverse()  # Reversing the order of hits for each image
         all_hits.extend(hits)  # add hits to master list
         status_callback(f"Finished processing image: {img_file}")
