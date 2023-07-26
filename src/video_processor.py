@@ -128,10 +128,10 @@ def sliding_window(output_dir):
 process_video('CreampuffBOT/temp/test_video.mp4', 'CreampuffBOT/temp/test_out.mp4')
 print("Done processing video")
 
-#compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
-#print("Done comparing to template.. removing duplicate frames")
+compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
+print("Done comparing to template.. removing duplicate frames")
 
-#remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
-#print("Done removing duplicates .. sliding window across screenshots")
+remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
+print("Done removing duplicates .. sliding window across screenshots")
 
-#sliding_window('CreampuffBOT/temp/vid_imgs')
+sliding_window('CreampuffBOT/temp/vid_imgs')
