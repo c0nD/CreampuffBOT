@@ -74,14 +74,22 @@ def process_kills_image(image_path):
 
 def process_images(input_dir, output_file, progress_callback, status_callback):
     all_hits = []
-
+    
+    i = 0
+    t_i = len(os.listdir(input_dir))
+    
     # Process all images in the directory
     for img_file in os.listdir(input_dir):
+        i += 1
+        
         img_path = os.path.join(input_dir, img_file)
         status_callback(f"Processing image: {img_file}")
-        hits = process_image(img_path, verbose=True)
+        hits = process_image(img_path, verbose=False)
+
         hits.reverse()  # Reversing the order of hits for each image
         all_hits.extend(hits)  # add hits to master list
+        print(f"Finished processing image {i}/{t_i}: {img_file}")
+        
         status_callback(f"Finished processing image: {img_file}")
         progress_callback()
 

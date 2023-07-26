@@ -8,9 +8,7 @@ def isolate_damage(path):
     img = cv2.imread(path)
     img = pi.remove_possible_padding(img)
     img = pi.resize_image_to_aspect_ratio(img)
-    
-    print("Image Loaded: ", img is not None)
-    
+        
     cv2.imwrite('CreampuffBOT/temp/damage.jpg', img)
     img = pi.crop_right(img)  # right quarter
     img = pi.crop_center(img)  # top/bottom 1/6
