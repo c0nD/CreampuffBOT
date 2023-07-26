@@ -1,32 +1,64 @@
 import cv2
 import image_preprocessor as ipp
 import os
+import subprocess, re
+
 
 def process_video(video_path, output_path):
-    video = cv2.VideoCapture(video_path)
+    """
+    Process a video to remove black bars from the edges and resize it to fit.
+    
+    Parameters:
+    - video_path: str, path to the input video
+    - output_path: str, path to save the processed video
+    """
+    
+    # First, use ffmpeg command to detect black bars
+    command = [
+        "ffmpeg", 
+        "-y",
+        "-i", video_path, 
+        "-vf", "cropdetect=24:16:0",  # Detect the black bars
+        "-f", "null", 
+        "-"
+    ]
+    
+    # Get crop information from the command's output
+    crop_info = subprocess.check_output(command, stderr=subprocess.STDOUT, universal_newlines=True)
+    crop_line = [line for line in crop_info.split("\n") if "crop" in line][-1]
+    m = re.search("crop=(\d+:\d+:\d+:\d+)", crop_line)
+    if not m:
+        print("No crop parameters detected. Exiting.")
+        return
+    crop_params = m.group(1)
+    
+    # Use the detected crop parameters to crop the video
+    command = [
+        "ffmpeg", 
+        "-y",
+        "-i", video_path, 
+        "-vf", f"crop={crop_params}",  # Apply the detected crop values
+        "-c:a", "copy",  # Keep audio unchanged
+        output_path
+    ]
+    
+    subprocess.run(command)
+    
+    
+def remove_padding(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # codec and videowriter object
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter(output_path, fourcc, 20.0, (2270, 1080))
+    if not contours:
+        raise Exception("No contours found in the image!")
 
-    # Find the crop region from the first frame
-    ret, frame = video.read()
-    if not ret:
-        raise Exception("Could not read frame from video")
-    frame = ipp.remove_possible_padding(frame)
-    frame_height, frame_width = frame.shape[:2]
+    max_contour = max(contours, key=cv2.contourArea)
+    x, y, w, h = cv2.boundingRect(max_contour)
+    cropped_image = image[y:y+h, x:x+w]
 
-    while True:
-        ret, frame = video.read()
-        if not ret:
-            break
-        # Apply the same crop to each frame
-        frame = frame[:frame_height, :frame_width]
-        frame = ipp.resize_image_to_aspect_ratio(frame)
-        out.write(frame)
+    return cropped_image
 
-    video.release()
-    out.release()
 
 
 def compare_to_template(video_path, template_path):
@@ -120,10 +152,10 @@ def sliding_window(output_dir):
 process_video('CreampuffBOT/temp/test_video.mp4', 'CreampuffBOT/temp/test_out.mp4')
 print("Done processing video")
 
-compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
-print("Done comparing to template.. removing duplicate frames")
+#compare_to_template('CreampuffBOT/temp/test_out.mp4', 'CreampuffBOT/src/template.png')
+#print("Done comparing to template.. removing duplicate frames")
 
-remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
-print("Done removing duplicates .. sliding window across screenshots")
+#remove_duplicate_frames('CreampuffBOT/temp/vid_imgs')
+#print("Done removing duplicates .. sliding window across screenshots")
 
-sliding_window('CreampuffBOT/temp/vid_imgs')
+#sliding_window('CreampuffBOT/temp/vid_imgs')
