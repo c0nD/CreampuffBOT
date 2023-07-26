@@ -5,15 +5,7 @@ import subprocess, re
 
 
 def process_video(video_path, output_path):
-    """
-    Process a video to remove black bars from the edges and resize it to fit.
-    
-    Parameters:
-    - video_path: str, path to the input video
-    - output_path: str, path to save the processed video
-    """
-    
-    # First, use ffmpeg command to detect black bars
+
     command = [
         "ffmpeg", 
         "-y",
@@ -37,28 +29,12 @@ def process_video(video_path, output_path):
         "ffmpeg", 
         "-y",
         "-i", video_path, 
-        "-vf", f"crop={crop_params}",  # Apply the detected crop values
-        "-c:a", "copy",  # Keep audio unchanged
+        "-vf", f"crop={crop_params}", 
+        "-c:a", "copy",
         output_path
     ]
     
     subprocess.run(command)
-    
-    
-def remove_padding(image):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
-    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    if not contours:
-        raise Exception("No contours found in the image!")
-
-    max_contour = max(contours, key=cv2.contourArea)
-    x, y, w, h = cv2.boundingRect(max_contour)
-    cropped_image = image[y:y+h, x:x+w]
-
-    return cropped_image
-
 
 
 def compare_to_template(video_path, template_path):
