@@ -11,6 +11,7 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 > [Git](https://git-scm.com/downloads) *Preinstalled on Macs and most Linux/Unix distros*  
 > [Python (>3.0)](https://www.python.org/downloads/) *Note: make sure to add it to PATH (Windows)*  
 > [Poetry](https://python-poetry.org/docs/#installation)  
+> [FFmpeg](https://ffmpeg.org/download.html) *For those who want to use the video -> screenshot feature*
 
 <sub><sup>*if Python is installed, you can do `pip install poetry` and check your installation with `poetry --version`*</sup></sub>
 
@@ -20,10 +21,6 @@ This bot/program's purpose is to take a folder of screenshots containing guild b
 
 <sub><sup>*if this doesn't work, you can do `pip install -r requirements.txt`*</sup></sub>  
 
-
-### Building
-If you wish to examine the source code yourself and build it into an untested executable you can perform the following:
-- From the `src` folder: `pyinstaller --onefile --windowed --additional-hooks-dir=. gui.py`
 
 ## GPU / CUDA Info
 - This program is intended to be run on CUDA compatible GPUs. Because this program does a lot with image processing: having a GPU that can be properly taken
