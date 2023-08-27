@@ -1,4 +1,7 @@
 # CreampuffBOT
+
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/dtqWqDv/creampuff.png" alt="creampuff" border="0" width="200px" height="200px"></a>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) ![python: 3.0+](https://img.shields.io/badge/python-3.0+-yellow.svg) ![poetry: 1.5+](https://img.shields.io/badge/poetry-1.5+-blue.svg) ![Git](https://img.shields.io/badge/Git-orange.svg)  
 **CRK Guild Battle OCR Data Logger**    
 
